@@ -1,0 +1,28 @@
+{
+  "name": "bible-graph",
+  "version": "1.0.0",
+  "description": "A GraphQL schema to interact with a Neo4j database containing the Bible",
+  "main": "index.js",
+  "dependencies": {
+    "dotenv": "^16.0.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://heinrichhanekom@github.com/heinrichhanekom/bible-graph.git"
+  },
+  "keywords": [
+    "bible",
+    "neo4j",
+    "graphql"
+  ],
+  "author": "Heinrich Hanekom",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/heinrichhanekom/bible-graph/issues"
+  },
+  "homepage": "https://github.com/heinrichhanekom/bible-graph#readme"
+}
