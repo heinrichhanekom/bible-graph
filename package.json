@@ -4,7 +4,11 @@
   "description": "A GraphQL schema to interact with a Neo4j database containing the Bible",
   "main": "index.js",
   "dependencies": {
-    "dotenv": "^16.0.3"
+    "@neo4j/graphql": "^3.10.1",
+    "apollo-server": "^3.10.3",
+    "dotenv": "^16.0.3",
+    "graphql": "^16.6.0",
+    "neo4j-driver": "^5.1.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
