@@ -13,5 +13,89 @@ type Person {
 }
 
 # ------------------------------------------------------------------------------------------------------#
+# Bible Books
+# ------------------------------------------------------------------------------------------------------#
+type Bible {
+  id: ID! @id
+  name: String!
+
+  testaments: [Testament!]! @relationship(type: "TESTAMENT_IN", direction: IN)
+
+  createdAt: DateTime! @timestamp(operations: [CREATE])
+  updatedAt: DateTime! @timestamp(operations: [UPDATE])
+}
+
+type Testament {
+  id: ID! @id
+  name: String!
+
+  bible: Bible! @relationship(type: "TESTAMENT_IN", direction: OUT)
+  books: [Book!]! @relationship(type: "BOOK_IN", direction: IN)
+
+  createdAt: DateTime! @timestamp(operations: [CREATE])
+  updatedAt: DateTime! @timestamp(operations: [UPDATE])
+}
+
+type Book {
+  id: ID! @id
+  name: String!
+  
+  # authors:
+  testament: Testament! @relationship(type: "BOOK_IN", direction: OUT)
+  chapters: [Chapter!]! @relationship(type: "CHAPTER_IN", direction: IN)
+
+  nextBook: Book @relationship(type: "IS_BEFORE", direction: IN)
+  previousBook: Book @relationship(type: "IS_BEFORE", direction: OUT)
+  
+  devision: Devision @relationship(type: "PART_OF", direction: OUT)
+
+
+  createdAt: DateTime! @timestamp(operations: [CREATE])
+  updatedAt: DateTime! @timestamp(operations: [UPDATE])
+}
+
+type Chapter {
+  id: ID! @id
+  number: Int!
+
+  book: Book! @relationship(type: "CHAPETER_IN", direction: OUT)
+  verses: [Verse!]! @relationship(type: "VERSE_IN", direction: IN)
+
+  nextChapter: Chapter @relationship(type: "IS_BEFORE", direction: IN)
+  previousChapter: Chapter @relationship(type: "IS_BEFORE", direction: OUT)
+
+  createdAt: DateTime! @timestamp(operations: [CREATE])
+  updatedAt: DateTime! @timestamp(operations: [UPDATE])
+}
+
+type Verse {
+  id: ID! @id
+  number: Int!
+  text: String!
+
+  chapter: Chapter! @relationship(type: "VERSE_IN", direction: OUT)
+
+  nextVerse: Verse @relationship(type: "IS_BEFORE", direction: IN)
+  previousVerse: Verse @relationship(type: "IS_BEFORE", direction: OUT)
+
+  createdAt: DateTime! @timestamp(operations: [CREATE])
+  updatedAt: DateTime! @timestamp(operations: [UPDATE])
+}
+
+# ------------------------------------------------------------------------------------------------------#
+# MORE INFO
+# ------------------------------------------------------------------------------------------------------#
+type Devision {
+  id: ID! @id
+  name: Int!
+  explination: String!
+
+  book: Book! @relationship(type: "PART_OF", direction: IN)
+
+  createdAt: DateTime! @timestamp(operations: [CREATE])
+  updatedAt: DateTime! @timestamp(operations: [UPDATE])
+}
+
+# ------------------------------------------------------------------------------------------------------#
 # INTERFACES
 # ------------------------------------------------------------------------------------------------------#
