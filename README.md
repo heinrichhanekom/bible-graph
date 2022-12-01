@@ -101,7 +101,7 @@ REQUIRE x.id IS UNIQUE;
 
 7. Import
 
-````
+```
 USING PERIODIC COMMIT
 LOAD CSV WITH HEADERS FROM 'file:///kjv.csv' AS row 
 WITH toInteger(row.Verse_ID) AS verse_id, 
@@ -153,4 +153,79 @@ WHERE b.bookNumber in range(40, 66)
 MATCH (t:Testament {name: "New Testament"})
 MERGE (b)-[:BOOK_IN]->(t)
 return b, t
+```
+
+10. Add Devisions
+```
+MERGE (d1:Devision {id: 1})
+  SET d1.name = "Law"
+WITH d1
+MATCH (b:Book) 
+WHERE b.bookNumber in range(1, 5)
+MERGE (b)-[:PART_OF]->(d1)
+return b, d1
+
+MERGE (d2:Devision {id: 2})
+  SET d2.name = "History (OT)"
+WITH d2
+MATCH (b:Book) 
+WHERE b.bookNumber in range(6, 17)
+MERGE (b)-[:PART_OF]->(d2)
+return b, d2
+
+MERGE (d3:Devision {id: 3})
+  SET d3.name = "Poetry"
+WITH d3
+MATCH (b:Book) 
+WHERE b.bookNumber in range(18, 22)
+MERGE (b)-[:PART_OF]->(d3)
+return b, d3
+
+MERGE (d4:Devision {id: 4})
+  SET d4.name = "Major Prophets"
+WITH d4
+MATCH (b:Book) 
+WHERE b.bookNumber in range(23, 27)
+MERGE (b)-[:PART_OF]->(d4)
+return b, d4
+
+MERGE (d5:Devision {id: 5})
+  SET d5.name = "Minor Prophets"
+WITH d5
+MATCH (b:Book) 
+WHERE b.bookNumber in range(28, 39)
+MERGE (b)-[:PART_OF]->(d5)
+return b, d5
+
+MERGE (d6:Devision {id: 6})
+  SET d6.name = "Gospels"
+WITH d6
+MATCH (b:Book) 
+WHERE b.bookNumber in range(40, 43)
+MERGE (b)-[:PART_OF]->(d6)
+return b, d6
+
+MERGE (d7:Devision {id: 7})
+  SET d7.name = "History (NT)"
+WITH d7
+MATCH (b:Book) 
+WHERE b.bookNumber in range(44, 44)
+MERGE (b)-[:PART_OF]->(d7)
+return b, d7
+
+MERGE (d8:Devision {id: 8})
+  SET d8.name = "Letters"
+WITH d8
+MATCH (b:Book) 
+WHERE b.bookNumber in range(45, 65)
+MERGE (b)-[:PART_OF]->(d8)
+return b, d8
+
+MERGE (d9:Devision {id: 9})
+  SET d9.name = "Prophecy"
+WITH d9
+MATCH (b:Book) 
+WHERE b.bookNumber in range(66, 66)
+MERGE (b)-[:PART_OF]->(d9)
+return b, d9
 ```
